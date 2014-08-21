@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="Auto Save Command"
+            defaultHandler="autosave.handlers.AutoSaveHandler"
+            id="auto-save.commands.autoSaveCommand">
+      <state
+         class="org.eclipse.ui.handlers.RegistryToggleState:false"
+         id="org.eclipse.ui.commands.toggleState">
+      </state>
+      </command>
+   </extension>
+   <extension point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
+         <toolbar
+               id="auto-save.toolbars.AutoSafeToolbar">
+            <command
+                  commandId="auto-save.commands.autoSaveCommand"
+                  icon="icons/auto-safe.png"
+                  tooltip="Enable Auto Safe"
+                  style="toggle"
+                  id="auto-save.toolbars.autoSaveCommand">
+            </command>
+         </toolbar>
+      </menuContribution>
+   	</extension>
+</plugin>
