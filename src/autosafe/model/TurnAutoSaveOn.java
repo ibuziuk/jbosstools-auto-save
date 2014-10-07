@@ -1,12 +1,12 @@
 package autosafe.model;
 
-import autosave.AutoSaveInitializer;
+import autosave.jobs.AutoSaveJob;
 
 public class TurnAutoSaveOn implements Command {
-	
+
 	@Override
 	public void execute() {
-		AutoSaveInitializer.INSTANCE.init();
+		AutoSaveJob.getInstance().schedule();
 	}
-
+	
 }

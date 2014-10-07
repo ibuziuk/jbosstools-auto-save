@@ -6,11 +6,9 @@ import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.Command;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
-import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.commands.IElementUpdater;
 import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.ui.menus.UIElement;
-import org.eclipse.jface.dialogs.MessageDialog;
 
 import autosafe.model.Switcher;
 import autosafe.model.TurnAutoSaveOff;
@@ -41,7 +39,6 @@ public class AutoSaveHandler extends AbstractHandler implements IElementUpdater 
 			switcher.turnOff();
 		}
 		
-//		test(newValue, event);
 		return null;
 	}
 
@@ -49,11 +46,5 @@ public class AutoSaveHandler extends AbstractHandler implements IElementUpdater 
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 		this.element = element;
 	}
-	
-//	private void test (boolean newValue, ExecutionEvent event) throws ExecutionException {
-//		IWorkbenchWindow window = HandlerUtil
-//				.getActiveWorkbenchWindowChecked(event);
-//		MessageDialog.openInformation(window.getShell(),
-//				String.valueOf(newValue), String.valueOf(newValue));
-//	}
+
 }

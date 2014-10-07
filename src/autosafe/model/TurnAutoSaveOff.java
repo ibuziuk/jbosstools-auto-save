@@ -1,12 +1,12 @@
 package autosafe.model;
 
-import autosave.AutoSaveInitializer;
+import autosave.jobs.AutoSaveJob;
 
 public class TurnAutoSaveOff implements Command {
 	
 	@Override
 	public void execute() {
-//		AutoSaveInitializer.INSTANCE.reset();
+		AutoSaveJob.getInstance().cancel();
 	}
 
 }
