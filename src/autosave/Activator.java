@@ -1,17 +1,27 @@
 package autosave;
 
+import org.eclipse.core.commands.Command;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.core.commands.NotEnabledException;
+import org.eclipse.core.commands.NotHandledException;
+import org.eclipse.core.commands.common.NotDefinedException;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
+
+import autosave.jobs.AutoSaveJob;
+import autosave.util.CommandUtil;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class Activator extends AbstractUIPlugin implements IStartup {
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "jbosstools-auto-save"; //$NON-NLS-1$
-
+	public static final String COMMAND_ID = "auto-save.commands.autoSaveCommand";
+	
 	// The shared instance
 	private static Activator plugin;
 	
@@ -27,8 +37,10 @@ public class Activator extends AbstractUIPlugin {
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#start(org.osgi.framework.BundleContext)
 	 */
 	public void start(BundleContext context) throws Exception {
+		System.out.println("start");
 		super.start(context);
 		plugin = this;
+		initCommand();
 	}
 
 	/*
@@ -58,5 +70,16 @@ public class Activator extends AbstractUIPlugin {
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+
+	@Override
+	public void earlyStartup() {
+	}
+	
+	private void initCommand() throws ExecutionException, NotDefinedException, NotEnabledException, NotHandledException {
+		boolean commandState = CommandUtil.getCommandState(COMMAND_ID);
+		if (commandState == true) {
+			AutoSaveJob.getInstance().schedule(); 
+		} 
 	}
 }

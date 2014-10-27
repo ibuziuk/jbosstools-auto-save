@@ -50,5 +50,5 @@ public class AutoSaveHandler extends AbstractHandler implements IElementUpdater 
 	public void updateElement(UIElement element, @SuppressWarnings("rawtypes") Map parameters) {
 		this.element = element;
 	}
-
+	
 }

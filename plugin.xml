@@ -23,9 +23,13 @@
                   icon="icons/auto-safe.png"
                   tooltip="Enable Auto Safe"
                   style="toggle"
+                  label="Bold"
                   id="auto-save.toolbars.autoSaveCommand">
             </command>
          </toolbar>
       </menuContribution>
    	</extension>
+    <extension point="org.eclipse.ui.startup">
+     <startup class="autosave.Activator"/>
+   </extension>
 </plugin>
