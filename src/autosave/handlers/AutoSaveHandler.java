@@ -32,11 +32,15 @@ public class AutoSaveHandler extends AbstractHandler implements IElementUpdater 
 		boolean newValue = !HandlerUtil.toggleCommandState(command);
 		
 		if (newValue) {
-			element.setTooltip(DISABLE_TOOLTIP);
 			switcher.turnOn();
+			if (element != null) {
+				element.setTooltip(DISABLE_TOOLTIP);				
+			}
 		} else {
-			element.setTooltip(ENABLE_TOOLTIP);
 			switcher.turnOff();
+			if (element != null) {
+				element.setTooltip(ENABLE_TOOLTIP);
+			}
 		}
 		
 		return null;

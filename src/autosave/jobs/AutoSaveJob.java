@@ -9,17 +9,23 @@ import autosave.util.EditorUtil;
 
 public class AutoSaveJob extends Job {
 	private static final String NAME = "Auto Save Job";
-	private static final long DELAY = 1500;
-	private static AutoSaveJob instance;
+	private static final long DELAY = 2000;
+	private static volatile AutoSaveJob instance;
 	private boolean running = true;
 	
 	
 	public static synchronized AutoSaveJob getInstance() {
-        if (instance == null) {
-            instance = new AutoSaveJob();
-        }
-        return instance;
-    }
+		AutoSaveJob localInstance = instance;
+		if (instance == null) {
+			synchronized (AutoSaveJob.class) {
+				localInstance = instance;
+				if (localInstance == null) {
+					instance = localInstance = new AutoSaveJob();
+				}
+			}
+		}
+		return localInstance;
+	}
 	
 	private AutoSaveJob() {
 		super(NAME);
@@ -41,7 +47,7 @@ public class AutoSaveJob extends Job {
 	}
 	
 	private void saveDirtyEditors() {
-		System.out.println("Perform Save");
+		System.out.println("Perform Save"); // TODO Need to delete it
 		EditorUtil.saveDirtyEditors();
 	}
 
